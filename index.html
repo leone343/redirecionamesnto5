@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abrir no navegador</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+  button {
+    padding: 15px 30px;
+    background: #ff007f;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover {
+    background: #ff3399;
+  }
+</style>
+</head>
+<body>
+
+<h1>Redirecionando...</h1>
+<p>Se nada acontecer, clique no botão abaixo para abrir no navegador externo.</p>
+
+<a id="manualLink">
+  <button>Abrir no navegador</button>
+</a>
+
+<script>
+  const destino = "https://leone343.github.io/conteudo50/";
+
+  function abrirNavegadorExterno() {
+    // Tenta usar intent do Android para forçar abrir no navegador externo
+    const intentUrl = `intent://${destino.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
+
+    // Primeiro tenta abrir pelo intent
+    window.location.href = intentUrl;
+
+    // Caso o intent falhe, tenta abrir direto
+    setTimeout(() => {
+      window.location.href = destino;
+    }, 800);
+  }
+
+  // Clique manual no botão
+  document.getElementById("manualLink").addEventListener("click", abrirNavegadorExterno);
+
+  // Redireciona automaticamente depois de 1s
+  setTimeout(abrirNavegadorExterno, 1000);
+</script>
+
+</body>
+</html>
+
+
